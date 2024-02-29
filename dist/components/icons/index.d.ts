@@ -5,4 +5,6 @@ export * from './RecordIcon';
 export * from './SendIcon';
 export * from './DeleteIcon';
 export * from './SendIcon';
+export * from './TrashIcon';
+export * from './XIcon';
 //# sourceMappingURL=index.d.ts.map
