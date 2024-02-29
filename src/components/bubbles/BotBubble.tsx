@@ -43,6 +43,9 @@ export const BotBubble = (props: Props) => {
   onMount(() => {
     if (botMessageEl) {
       botMessageEl.innerHTML = Marked.parse(props.message);
+      botMessageEl.querySelectorAll('a').forEach(link => {
+        link.target = '_blank';
+      });
       if (props.fileAnnotations && props.fileAnnotations.length) {
         for (const annotations of props.fileAnnotations) {
           const button = document.createElement('button');
@@ -75,8 +78,8 @@ export const BotBubble = (props: Props) => {
       <Show when={props.showAvatar}>
         <Avatar initialAvatarSrc={props.avatarSrc} />
       </Show>
-      <div class="host-message-container relative group">
-        <div
+      {props.message && (
+        <span
           ref={botMessageEl}
           class="px-4 py-2 ml-2 max-w-full chatbot-host-bubble prose"
           data-testid="host-bubble"
@@ -86,15 +89,7 @@ export const BotBubble = (props: Props) => {
             'border-radius': '6px',
           }}
         />
-        <div
-          class="flex justify-end gap-2 host-actions absolute bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white bg-black p-2 pl-4 pr-4 rounded-md"
-          style={{ visibility: isHovered() ? 'visible' : 'hidden' }}
-        >
-          <button>Copy</button>
-          <button>Feedback</button>
-          <button>Share</button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

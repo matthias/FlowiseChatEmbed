@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Flowise ChatEmbed Demo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- <dialog class="chat-overlay" id="chat-overlay">
+      <button autofocus class="close-button">Close</button>
+      <p>Dialog content</p>
+    </dialog>
+    <div><button id="chat-bubble">Open Chat !</button></div>
+    <script>
+        const dialog = document.querySelector("dialog#chat-overlay");
+        const closeButton = dialog.querySelector(".close-button");
+        const showButton = document.querySelector("#chat-bubble");
+        showButton.addEventListener("click", () => {
+          dialog.showModal();
+        });
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+        });
+    </script> -->
+
+    <script type="module">
+        import iCollettiva from '../icollettiva.js';
+        iCollettiva.init({
+          id: "bot-01",
+          chatflowid: "b07341b9-97b4-491e-a49e-8cf7da73d235",
+          apiHost: "http://localhost:3000",
+          welcomeMessage: "Hello! This is custom welcome message",
+          theme: {
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.5)"
+            }
+          }
+        });
+    </script>
+    <icollettiva-chatbot id="bot-01"></icollettiva-chatbot>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+{"version":3,"file":"convertCssVars.d.ts","sourceRoot":"","sources":["../../src/utils/convertCssVars.ts"],"names":[],"mappings":"AAAA;;;;;;;GAOG;AACH,eAAO,MAAM,cAAc,iBAAkB,UAAU,SAAS,UAAU,GAAG,SAAS,cAAa,MAAM,GAAG,SAAS;;CASpH,CAAC;AAEF,MAAM,WAAW,UAAU;IACzB,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM,GAAG,OAAO,GAAG,SAAS,CAAC;CAC7C"}
