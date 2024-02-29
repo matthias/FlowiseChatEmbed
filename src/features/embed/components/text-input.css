@@ -1,0 +1,6 @@
+
+.chatbot-text-input {
+    border-top: 1px solid #ccc;
+    background-color: var(--chatbot-chatwindow-background-color, #f5f5f5);
+    color: var(--chatbot-chatwindow-text-color, #000);
+}

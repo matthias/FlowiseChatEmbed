@@ -1,0 +1,8 @@
+{
+  "extends": ["development", "development/ts", "development/solidjs", "development/solidjs/ts"],
+  "hints": {
+    "no-inline-styles": [
+      "off"
+    ]
+  }
+}

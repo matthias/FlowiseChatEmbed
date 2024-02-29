@@ -1,0 +1,27 @@
+.chatbot-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.chatbot-container {
+  background-image: var(--chatbot-container-bg-image);
+  background-color: var(--chatbot-container-bg-color);
+  font-family: var(--chatbot-font-family);
+}
+
+.chatbot-titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    height: 48px;
+    background-color: var(--chatwindow-titlebar-bg-color);
+    color: var(--chatwindow-titlebar-color);
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--chatwindow-titlebar-border-color, #e0e0e0);
+}
+
+

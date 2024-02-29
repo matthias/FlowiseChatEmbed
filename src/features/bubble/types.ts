@@ -28,10 +28,15 @@ export type BotMessageTheme = {
   avatarSrc?: string;
 };
 
-export type ChatWindowTheme = {
+export type ChatWindowHeaderTheme = {
   showTitle?: boolean;
   title?: string;
   titleAvatarSrc?: string;
+  headerBackgroundColor?: string;
+  headerTextColor?: string;
+};
+
+export type ChatWindowTheme = ChatWindowHeaderTheme & {
   welcomeMessage?: string;
   backgroundColor?: string;
   height?: number;

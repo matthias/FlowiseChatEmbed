@@ -50,7 +50,7 @@ export const Badge = (props: Props) => {
         'background-color': props.badgeBackgroundColor ?? '#ffffff',
       }}
     >
-      Powered by
+      DISCLAIMER: Antworten können unvollständig oder falsch sein. - Powered by
       <a
         ref={liteBadge}
         href={'https://flowiseai.com'}

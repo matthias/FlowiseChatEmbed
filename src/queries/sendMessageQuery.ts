@@ -23,6 +23,13 @@ export const sendMessageQuery = ({ chatflowid, apiHost = 'http://localhost:3000'
     body,
   });
 
+export const sendFeedbackQuery = ({ chatflowid, apiHost = 'http://localhost:3000', body }: MessageRequest) =>
+  sendRequest<any>({
+    method: 'POST',
+    url: `${apiHost}/api/v1/feedback/${chatflowid}`,
+    body,
+  });
+
 export const getChatbotConfig = ({ chatflowid, apiHost = 'http://localhost:3000' }: MessageRequest) =>
   sendRequest<any>({
     method: 'GET',

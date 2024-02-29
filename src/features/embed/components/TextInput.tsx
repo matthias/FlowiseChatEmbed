@@ -2,24 +2,34 @@ import { ShortTextInput } from './ShortTextInput';
 import { isMobile } from '@/utils/isMobileSignal';
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { SendButton } from '@/components/SendButton';
+import { convertCssVars } from '@/utils/convertCssVars';
+import { useChatContext } from '@/app/ChatContext';
 
-type Props = {
-  placeholder?: string;
-  backgroundColor?: string;
-  textColor?: string;
-  sendButtonColor?: string;
-  defaultValue?: string;
-  fontSize?: number;
-  disabled?: boolean;
-  onSubmit: (value: string) => void;
+export const defaultTextInputTheme = {
+  backgroundColor: '#ffffff',
+  textColor: '#303235',
+  sendButtonColor: '#ffffff',
+  fontSize: 16,
 };
 
-const defaultBackgroundColor = '#ffffff';
-const defaultTextColor = '#303235';
+export type TextInputTheme = Partial<typeof defaultTextInputTheme>; // make all properties optional
 
-export const TextInput = (props: Props) => {
+export const defaultTextInputProps = {
+  placeholder: 'Type your question',
+  defaultValue: '',
+  disabled: false,
+};
+
+export type TextInputProps = Partial<typeof defaultTextInputProps> & {
+  onSubmit: (value: string) => void;
+} & TextInputTheme;
+
+export const TextInput = (props: TextInputProps) => {
   const [inputValue, setInputValue] = createSignal(props.defaultValue ?? '');
   let inputRef: HTMLInputElement | HTMLTextAreaElement | undefined;
+
+  const context: any = useChatContext();
+  const cssVars = () => convertCssVars(defaultTextInputTheme, context.props?.theme?.chatWindow, 'chatwindow');
 
   const handleInput = (inputValue: string) => setInputValue(inputValue);
 
@@ -33,7 +43,12 @@ export const TextInput = (props: Props) => {
   const submitWhenEnter = (e: KeyboardEvent) => {
     // Check if IME composition is in progress
     const isIMEComposition = e.isComposing || e.keyCode === 229;
-    if (e.key === 'Enter' && !isIMEComposition) submit();
+
+    // Check if the key is Enter and not a shift key
+    if (e.key === 'Enter' && !e.shiftKey && !isIMEComposition) {
+      e.preventDefault();
+      submit();
+    }
   };
 
   createEffect(() => {
@@ -46,20 +61,16 @@ export const TextInput = (props: Props) => {
 
   return (
     <div
-      class={'flex items-end justify-between chatbot-input'}
+      part="chatbot-text-input"
+      class={'chatbot-input chatbot-text-input flex items-end justify-between'}
+      style={cssVars()}
       data-testid="input"
-      style={{
-        'border-top': '1px solid #eeeeee',
-        'background-color': props.backgroundColor ?? defaultBackgroundColor,
-        color: props.textColor ?? defaultTextColor,
-      }}
       onKeyDown={submitWhenEnter}
     >
       <ShortTextInput
         ref={inputRef as HTMLInputElement}
         onInput={handleInput}
         value={inputValue()}
-        fontSize={props.fontSize}
         disabled={props.disabled}
         placeholder={props.placeholder ?? 'Type your question'}
       />
@@ -70,7 +81,7 @@ export const TextInput = (props: Props) => {
         class="my-2 ml-2"
         on:click={submit}
       >
-        <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
+        <span>Send</span>
       </SendButton>
     </div>
   );
