@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Flowise ChatEmbed Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <style>
+    icollettiva-chatbot {
+      --overlay-background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
+  <script type="module">
+    import Flowise from '../icollettiva.js';
+    Flowise.initOverlay({
+      id: "bot-01",
+      chatflowid: "b07341b9-97b4-491e-a49e-8cf7da73d235",
+      apiHost: "http://localhost:3000",
+      // welcomeMessage: "Hello! This is custom welcome message",
+      theme: {
+        chatWindow: {
+          title: 'waff Pflegechatbot',
+          titleAvatarSrc: './assets/waff-avatar-filled.svg',
+          titlebarBgColor: '#ffffff',
+        },
+        overlay: {
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          // backgroundImage: "url(./bg-gradient.jpg)",
+          backgroundImage: "radial-gradient(circle at 0.54% 7.38%, rgb(112, 35, 138), transparent 28%), radial-gradient(circle at 58.91% 57.57%, rgb(112, 35, 138), transparent 56%), radial-gradient(circle at 82.45% 99.62%, rgb(255, 71, 71), transparent 34%), radial-gradient(circle at 99.93% 48.44%, rgb(112, 35, 138), transparent 19%), radial-gradient(circle at 87.48% 0.38%, rgb(255, 104, 71), transparent 41%), radial-gradient(circle at 38.64% 15.39%, rgb(255, 71, 71), transparent 52%), radial-gradient(circle at 21.29% 70.59%, rgb(255, 104, 71), transparent 47%), radial-gradient(circle at 50% 50%, rgb(112, 35, 138), rgb(112, 35, 138) 100%)",
+          asideBackgroundImage: "url(./waff-klammer.svg)",
+        }
+      }
+    });
+  </script>
+  <flowise-overlay id="bot-01"></flowise-overlay>
+</body>
+
+</html>
