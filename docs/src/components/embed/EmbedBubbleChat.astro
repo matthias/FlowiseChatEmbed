@@ -1,0 +1,40 @@
+---
+// 
+---
+
+<button id="run-code-button">Run Code</button>
+
+<script type="module">
+  import Chatbot from "http://localhost:5678/web.js";
+
+  window.addEventListener('load', () => {
+    init();
+  });
+  window.addEventListener('config-update', (data) => {
+    console.log('config-updated event received ...', data.detail);
+    init();
+  });
+  
+  function init() {  
+    const button = document.getElementById('run-code-button');
+    const chatflowid = localStorage.getItem('chatflowid');
+    const apiHost = localStorage.getItem('apiHost');
+    if (chatflowid && apiHost) {
+        const chatbot = Chatbot.init({
+            chatflowid,
+            apiHost
+        });
+        window.chatbot = chatbot;
+        button.textContent = 'Successfully embeded chat bubble ...';
+        button.setAttribute('disabled', true);
+    } else {
+        button.textContent = 'Configure Chatflow ID and API Host in Settings';
+        button.addEventListener('click', () => {
+            // redirect to /settings
+            button.textContent = 'Configure chatflowID and apiHost in Settings';
+            window.location.href = '/settings/';
+        });
+    }
+  }
+  init();
+</script>

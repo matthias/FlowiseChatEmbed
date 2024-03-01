@@ -1,0 +1,130 @@
+---
+// Import necessary scripts and styles here
+---
+
+<form id="configForm" class="form-grid">
+  <fieldset>
+    <legend>Configuration for Demos</legend>
+
+    <p class="span-all mb-6">This configurations will be used for the demos and examples.</p>
+
+    <label for="chatflowid">Chatflow ID:</label>
+    <input type="text" id="chatflowid" name="chatflowid" required />
+    <p class="hint">You need .</p>
+
+    <label for="apiHost">API Host:</label>
+    <input type="text" id="apiHost" name="apiHost" placeholder="http://localhost:3000" required />
+    <p class="hint">If you use a local server make sure it's up and running.</p>
+
+    <button type="submit">Update Configuration</button>
+  </fieldset>
+</form>
+
+<script>
+  const form = document.getElementById('configForm') as HTMLFormElement;
+  const chatflowidInput = document.getElementById('chatflowid') as HTMLInputElement;
+  const apiHostInput = document.getElementById('apiHost') as HTMLInputElement;
+
+  // Load preferences from local storage if they exist
+  window.addEventListener('load', () => {
+    const savedChatflowid = localStorage.getItem('chatflowid');
+    const savedApiHost = localStorage.getItem('apiHost');
+    if (savedChatflowid) {
+      chatflowidInput.value = savedChatflowid;
+    }
+    if (savedApiHost) {
+      apiHostInput.value = savedApiHost;
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const chatflowid = formData.get('chatflowid') as string;
+    const apiHost = formData.get('apiHost') as string;
+
+    // Save to local storage
+    localStorage.setItem('chatflowid', chatflowid);
+    localStorage.setItem('apiHost', apiHost);
+
+    // Emit custom event with configuration data
+    form.dispatchEvent(
+      new CustomEvent('config-update', {
+        bubbles: true,
+        detail: { chatflowid, apiHost },
+      }),
+    );
+
+    const button = form.querySelector('button') as HTMLButtonElement;
+    button.textContent = 'Configuration Updated';
+    button.setAttribute('disabled', 'disabled');
+    window.setTimeout(() => {
+      button.textContent = 'Update Configuration';
+      button.removeAttribute('disabled');
+    }, 1200);
+  });
+
+
+</script>
+
+<style>
+  form > fieldset {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25em;
+    padding: 1em;
+  }
+  form > fieldset > legend {
+    font-weight: bold;
+    padding: 0 0.5em;
+    font-size: 1.5em;
+  }
+
+  form > fieldset {
+    display: grid;
+    padding: 1em;
+    grid-template-columns: [label] minmax(5rem, 7rem) [field] 1fr;
+    grid-template-rows: auto;
+    gap: 0.5em;
+  }
+
+  form > fieldset > .span-all {
+    grid-column: 1 / -1;
+  }
+
+  form label {
+    grid-column: label;
+    font-weight: bold;
+    margin-top: 0 !important;
+    align-content: center;
+    justify-content: center;
+  }
+  form input,
+  form select,
+  form textarea {
+    grid-column: field;
+    padding: 0.25em 0.5em;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25em;
+  }
+  form p.hint {
+    grid-column: field;
+    font-size: 0.85em;
+    color: var(--sl-color-gray-3);
+    padding-left: 0.2em;
+    margin-top: -0.5em;
+    font-style: italic;
+  }
+  form input[type='submit'],
+  form button {
+    margin-top: 1em;
+    width: fit-content;
+    grid-column: field;
+    padding: 0.25em 1.5em;
+    background-color: var(--sl-color-accent);
+    color: #fff;
+    border: none;
+    border-radius: 0.25em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+</style>

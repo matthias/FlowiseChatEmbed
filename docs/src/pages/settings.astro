@@ -1,0 +1,13 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import ConfigForm from '@/components/ConfigForm.astro';
+---
+
+<StarlightPage frontmatter={{ 
+  title: 'Settings for Embeddings', 
+  tableOfContents: false,
+  prev: { link: '/', label: 'Home' }, 
+  next: { link: '/demos/', label: 'Demos' } 
+}}>
+  <ConfigForm />
+</StarlightPage>

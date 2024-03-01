@@ -3,6 +3,8 @@ title: Configure
 description: A reference page in my new Starlight docs site.
 ---
 
+import { Code } from '@astrojs/starlight/components';
+
 Add a chat bubble to the lower right corner of your site, which will open the chat as a popup.
 
 ## Chat Endpoint

@@ -1,0 +1,7 @@
+<script type="module">
+    import Chatbot from '{{scriptPath}}/web.js';
+    Chatbot.init({
+        chatflowid: {{chatflowid}},
+        apiHost: '{{apiHost}}',
+    });
+</script>

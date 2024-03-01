@@ -1,5 +1,10 @@
 import { defineConfig } from 'astro/config';
+import { astroExpressiveCode } from '@astrojs/starlight/expressive-code';
 import starlight from '@astrojs/starlight';
+import mdx from '@astrojs/mdx';
+import solid from '@astrojs/solid-js';
+import react from '@astrojs/react';
+
 
 import tailwind from "@astrojs/tailwind";
 
@@ -7,9 +12,19 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   trailingSlash: 'ignore',
   markdown: {
-    syntaxHighlight: 'prism',
+    syntaxHighlight: 'shiki',
   },
   integrations: [
+    react({
+      include: ['**/react/*'],
+    }),
+    solid({
+      include: ['**/solid/*'],
+    }),
+    astroExpressiveCode(),
+    mdx({
+      syntaxHighlight: 'shiki',
+    }),
     starlight({
       title: 'FlowiseChatEmbed',
       customCss: ['./src/tailwind.css'],
@@ -29,10 +44,12 @@ export default defineConfig({
             directory: 'guides',
           },
         },
+        { label: 'Settings', link: '/settings/' },
       ],
     }),
     tailwind({
       applyBaseStyles: false,
     }),
+    // mdx(),
   ],
 });
