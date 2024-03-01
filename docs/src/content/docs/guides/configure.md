@@ -9,37 +9,36 @@ Add a chat bubble to the lower right corner of your site, which will open the ch
 
 ```javascript
 Chatbot.init({
-    chatflowid: "<chatflowid>",
-    apiHost: "http://localhost:3000",
-})
+  chatflowid: '<chatflowid>',
+  apiHost: 'http://localhost:3000',
+});
 ```
 
 ## Configuration
 
 ```javascript
 Chatbot.init({
-    chatflowid: "'<chatflowid>'",
-    apiHost: "http://localhost:3000",
-    chatflowConfig: {
-        // topK: 2
+  chatflowid: "'<chatflowid>'",
+  apiHost: 'http://localhost:3000',
+  chatflowConfig: {
+    // topK: 2
+  },
+  theme: {
+    button: {
+      backgroundColor: '#3B81F6',
+      right: 20,
+      bottom: 20,
+      size: 'medium',
+      iconColor: 'white',
+      customIconSrc: 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/google-messages.svg',
     },
-    theme: {
-        button: {
-            backgroundColor: "#3B81F6",
-            right: 20,
-            bottom: 20,
-            size: "medium",
-            iconColor: "white",
-            customIconSrc: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/google-messages.svg",
-        },
-        chatWindow: {
-            welcomeMessage: "Hello! This is custom welcome message",
-            // etc ...
-        }
-    }
-})
+    chatWindow: {
+      welcomeMessage: 'Hello! This is custom welcome message',
+      // etc ...
+    },
+  },
+});
 ```
-
 
 ## Configure
 
