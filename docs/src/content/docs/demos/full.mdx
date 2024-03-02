@@ -1,0 +1,16 @@
+---
+title: Full
+description: Integrated the chat window inline as a web component.
+---
+
+import { Code } from '@astrojs/starlight/components';
+import EmbedFull from '@/components/embed/EmbedFull.astro';
+import embedFullChatCode from './_embed-full.code?raw';
+
+Integrated the chat window inline as a web component.
+
+## Embed Code
+
+<Code code={embedFullChatCode} lang="html" id="popup-code" meta="test" />
+
+<EmbedFull />

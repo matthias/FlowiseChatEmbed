@@ -1,0 +1,14 @@
+---
+// This needs to be it's own component, as we can't have <script> tags in .mdx files
+---
+
+<button id="run-code-button">Run Code</button>
+
+<flowise-fullchatbot></flowise-fullchatbot>
+
+<script>
+  import { handleEmbedCode } from './embedCode.js';
+  handleEmbedCode( 'initFull', 'run-code-button' );
+</script>
+
+
