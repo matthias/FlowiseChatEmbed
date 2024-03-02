@@ -10,7 +10,7 @@ export function handleEmbedCode(initFunctionName, buttonID, execute = true) {
   } else {
     button.addEventListener('click', () => embedCode());
   }
-  
+
   function embedCode() {
     // Get config from local storage
     const chatFlowConfig = {
