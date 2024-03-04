@@ -13,6 +13,13 @@ export default defineConfig({
   trailingSlash: 'ignore',
   markdown: {
     syntaxHighlight: 'shiki',
+    shikiConfig: {
+      theme: 'dracula',
+      experimentalThemes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    }
   },
   integrations: [
     react({
@@ -22,9 +29,7 @@ export default defineConfig({
       include: ['**/solid/*'],
     }),
     astroExpressiveCode(),
-    mdx({
-      syntaxHighlight: 'shiki',
-    }),
+    mdx(),
     starlight({
       title: 'FlowiseChatEmbed',
       customCss: ['./src/tailwind.css'],
