@@ -10,6 +10,7 @@ import typescript from '@rollup/plugin-typescript';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import commonjs from '@rollup/plugin-commonjs';
 import { uglify } from 'rollup-plugin-uglify';
+import copy from 'rollup-plugin-copy';
 
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
@@ -59,6 +60,9 @@ const indexConfig = {
     typescriptPaths({ preserveExtensions: true }),
     terser({ output: { comments: false } }),
     ...(isDev ? serveDevDemoPages : []),
+    copy({
+      targets: [{ src: 'src/assets/*', dest: 'dist/assets' }],
+    }),
   ],
 };
 

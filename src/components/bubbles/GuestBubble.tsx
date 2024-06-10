@@ -15,8 +15,9 @@ type Props = {
   fontSize?: number;
 };
 
-const defaultBackgroundColor = '#3B81F6';
-const defaultTextColor = '#ffffff';
+const defaultBackgroundColor = 'var(--chatbot-guest-bubble-bg-color, #3B81F6)';
+const defaultTextColor = 'var(--chatbot-guest-bubble-color, #ffffff)';
+
 const defaultFontSize = 16;
 
 Marked.setOptions({ isNoP: true });
@@ -31,14 +32,13 @@ export const GuestBubble = (props: Props) => {
   });
 
   return (
-    <div class="flex justify-end mb-2 items-end guest-container" style={{ 'margin-left': '50px' }}>
+    <div class="flex justify-end mb-6 items-end guest-container ml-10">
       <div
-        class="max-w-full flex flex-col justify-center items-start chatbot-guest-bubble px-4 py-2 gap-2 mr-2"
+        class="max-w-full flex flex-col justify-center items-start chatbot-guest-bubble px-4 py-2 gap-2 mr-2 rounded-lg rounded-br-none"
         data-testid="guest-bubble"
         style={{
           'background-color': props.backgroundColor ?? defaultBackgroundColor,
           color: props.textColor ?? defaultTextColor,
-          'border-radius': '6px',
         }}
       >
         {props.message.fileUploads && props.message.fileUploads.length > 0 && (

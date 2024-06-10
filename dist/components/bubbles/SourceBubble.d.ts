@@ -1,6 +1,9 @@
 type Props = {
     pageContent: string;
-    metadata: object;
+    metadata: {
+        topic?: string;
+        source?: string;
+    };
     onSourceClick?: () => void;
 };
 export declare const SourceBubble: (props: Props) => import("solid-js").JSX.Element;

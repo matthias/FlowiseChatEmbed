@@ -45,10 +45,11 @@ export const Badge = (props: Props) => {
           class="w-full text-center px-[10px] pt-[6px] pb-[10px] m-auto text-[13px]"
           style={{
             color: props.footer?.textColor ?? props.poweredByTextColor ?? defaultTextColor,
-            'background-color': props.badgeBackgroundColor ?? '#ffffff',
+            'background-color': props.badgeBackgroundColor ?? 'transparent',
           }}
         >
           {props.footer?.text ?? 'Powered by'}
+          &nbsp;
           <a
             ref={liteBadge}
             href={props.footer?.companyLink ?? 'https://flowiseai.com'}
@@ -58,7 +59,7 @@ export const Badge = (props: Props) => {
             id="lite-badge"
             style={{ 'font-weight': 'bold', color: props.footer?.textColor ?? props.poweredByTextColor ?? defaultTextColor }}
           >
-            <span>&nbsp;{props.footer?.company ?? 'Flowise'}</span>
+            <span>{props.footer?.company ?? 'Flowise!'}</span>
           </a>
         </span>
       </Show>

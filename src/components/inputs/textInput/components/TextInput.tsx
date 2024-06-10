@@ -28,13 +28,18 @@ const defaultTextColor = '#303235';
 
 export const TextInput = (props: Props) => {
   const [inputValue, setInputValue] = createSignal(props.defaultValue ?? '');
-  const [isSendButtonDisabled, setIsSendButtonDisabled] = createSignal(false);
+  const [isSendButtonDisabled, setIsSendButtonDisabled] = createSignal(true);
   const [warningMessage, setWarningMessage] = createSignal('');
   let inputRef: HTMLInputElement | HTMLTextAreaElement | undefined;
   let fileUploadRef: HTMLInputElement | HTMLTextAreaElement | undefined;
 
   const handleInput = (inputValue: string) => {
     const wordCount = inputValue.length;
+
+    if (props.maxChars && wordCount < 2) {
+      setIsSendButtonDisabled(true);
+      return;
+    }
 
     if (props.maxChars && wordCount > props.maxChars) {
       setWarningMessage(props.maxCharsWarningMessage ?? `You exceeded the characters limit. Please input less than ${props.maxChars} characters.`);
@@ -78,7 +83,7 @@ export const TextInput = (props: Props) => {
 
   return (
     <div
-      class="w-full h-auto max-h-[128px] min-h-[56px] flex flex-col items-end justify-between chatbot-input border border-[#eeeeee]"
+      class="w-full h-auto max-h-[128px] min-h-[50px] flex flex-col items-end justify-between chatbot-input border border-neutral-400"
       data-testid="input"
       style={{
         margin: 'auto',
@@ -92,13 +97,13 @@ export const TextInput = (props: Props) => {
           {warningMessage()}
         </div>
       </Show>
-      <div class="w-full flex items-end justify-between">
+      <div class="w-full flex items-center justify-between">
         {props.uploadsConfig?.isImageUploadAllowed ? (
           <>
             <ImageUploadButton
               buttonColor={props.sendButtonColor}
               type="button"
-              class="m-0 h-14 flex items-center justify-center"
+              class="m-0 h-10 flex items-center justify-center"
               isDisabled={props.disabled || isSendButtonDisabled()}
               on:click={handleImageUploadClick}
             >
@@ -107,19 +112,22 @@ export const TextInput = (props: Props) => {
             <input style={{ display: 'none' }} multiple ref={fileUploadRef as HTMLInputElement} type="file" onChange={handleFileChange} />
           </>
         ) : null}
-        <ShortTextInput
-          ref={inputRef as HTMLTextAreaElement}
-          onInput={handleInput}
-          value={inputValue()}
-          fontSize={props.fontSize}
-          disabled={props.disabled}
-          placeholder={props.placeholder ?? 'Type your question'}
-        />
+        <div class="pt-[6px] flex-grow">
+          <ShortTextInput
+            ref={inputRef as HTMLTextAreaElement}
+            onInput={handleInput}
+            maxlength={props.maxChars}
+            value={inputValue()}
+            fontSize={props.fontSize}
+            disabled={props.disabled}
+            placeholder={props.placeholder ?? 'Type your question'}
+          />
+        </div>
         {props.uploadsConfig?.isSpeechToTextEnabled ? (
           <RecordAudioButton
             buttonColor={props.sendButtonColor}
             type="button"
-            class="m-0 start-recording-button h-14 flex items-center justify-center"
+            class="m-0 start-recording-button h-12 flex items-center justify-center"
             isDisabled={props.disabled || isSendButtonDisabled()}
             on:click={props.onMicrophoneClicked}
           >
@@ -130,7 +138,7 @@ export const TextInput = (props: Props) => {
           sendButtonColor={props.sendButtonColor}
           type="button"
           isDisabled={props.disabled || isSendButtonDisabled()}
-          class="m-0 h-14 flex items-center justify-center"
+          class="m-0 h-12 flex items-center justify-center"
           on:click={submit}
         >
           <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>

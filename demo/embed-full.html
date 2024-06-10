@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Test ChatBot Embeds</title>
     <link rel="stylesheet" href="demo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+</head>
+
+<body>
     <header>
         <div class="container">
             <div>
@@ -15,14 +17,17 @@
             <nav class="nav-horizontal">
                 <a href="embed-chatbubble.html">ChatBubble</a>
                 <a href="embed-full.html">Full</a>
+                <a href="embed-modal-with-button.html">Modal</a>
             </nav>
         </div>
     </header>
     <main>
         <div class="container">
             <h2>Some Demo Content</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit pariatur,
-                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure! Nihil,
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit
+                pariatur,
+                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure!
+                Nihil,
                 fugiat.</p>
 
             <h3>Config ChatBot</h3>
@@ -44,11 +49,25 @@
                     ...getChatConfig(),
                     theme: {
                         chatWindow: {
-                            welcomeMessage: "Hello! This is custom welcome message",
+                            welcomeMessage: "**Ich bin der waff Chatbot.**\n\nIch kann dir helfen deine Fragen zu *Jobs PLUS Ausbildung* im Bereich **Sozial- und Pflegeberufe** zu beantworten.",
                             backgroundColor: "#ffffff",
-                            height: 700,
+                            // height: 700,
                             fontSize: 16,
-                        }
+                            textInput: {
+                                placeholder: 'Schreibe hier deine Frage...',
+                                backgroundColor: '#ffffff',
+                                textColor: '#303235',
+                                sendButtonColor: '#3B81F6',
+                                maxChars: 250,
+                                maxCharsWarningMessage: 'Du hast die maximale Fragelänge erreicht.',
+                            },
+                            footer: {
+                                textColor: '#999',
+                                text: 'HINWEIS: Antworten des Chatbots sind unverbindlich und können Fehler enthalten. Bereitgestellt vom',
+                                company: 'waff',
+                                companyLink: 'https://www.waff.at',
+                            },
+                        },
                     }
                 };
                 console.log(chatConfig);
@@ -59,6 +78,7 @@
                     border: 1px solid #ccc;
                     margin-top: 3rem;
                 }
+
                 flowise-fullchatbot {
                     height: 100%;
                     width: 100%;
@@ -67,14 +87,20 @@
             </style>
 
             <h2>Some more Demo Content</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit pariatur,
-                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure! Nihil,
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit
+                pariatur,
+                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure!
+                Nihil,
                 fugiat.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit pariatur,
-                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure! Nihil,
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit
+                pariatur,
+                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure!
+                Nihil,
                 fugiat.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit pariatur,
-                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure! Nihil,
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit
+                pariatur,
+                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure!
+                Nihil,
                 fugiat.</p>
         </div>
     </main>
@@ -89,5 +115,6 @@
             </div>
         </div>
     </footer>
-  </body>
+</body>
+
 </html>

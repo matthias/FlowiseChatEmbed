@@ -15,4 +15,5 @@ export declare const setLocalStorageChatflow: (chatflowid: string, chatId: strin
 export declare const getLocalStorageChatflow: (chatflowid: string) => any;
 export declare const removeLocalStorageChatHistory: (chatflowid: string) => void;
 export declare const getBubbleButtonSize: (size: 'small' | 'medium' | 'large' | number | undefined) => number;
+export declare const getModalButtonSize: (size: 'small' | 'medium' | 'large' | number | undefined) => number;
 //# sourceMappingURL=index.d.ts.map

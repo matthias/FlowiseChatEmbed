@@ -18,6 +18,14 @@ export const initFull = (props: BotProps & { id?: string }) => {
   elementUsed = fullElement;
 };
 
+export const initModal = (props: BotProps & { id?: string }) => {
+  destroy();
+  const modalElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-modalchatbot');
+  if (!modalElement) throw new Error('<flowise-modalchatbot> element not found.');
+  Object.assign(modalElement, props);
+  elementUsed = modalElement;
+};
+
 export const init = (props: BotProps) => {
   destroy();
   const element = document.createElement('flowise-chatbot');
@@ -33,6 +41,7 @@ export const destroy = () => {
 type Chatbot = {
   initFull: typeof initFull;
   init: typeof init;
+  initModal: typeof initModal;
   destroy: typeof destroy;
 };
 
@@ -45,6 +54,7 @@ declare const window:
 export const parseChatbot = () => ({
   initFull,
   init,
+  initModal,
   destroy,
 });
 

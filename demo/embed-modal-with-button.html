@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Test ChatBot Embeds</title>
+    <link rel="stylesheet" href="demo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div>
+                <h1>FlowiseChatEmbed</h1>
+            </div>
+            <nav class="nav-horizontal">
+                <a href="embed-chatbubble.html">ChatBubble</a>
+                <a href="embed-full.html">Full</a>
+                <a href="embed-modal-with-button.html">Modal</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Some Demo Content</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit
+                pariatur,
+                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure!
+                Nihil,
+                fugiat.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit
+                pariatur,
+                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure!
+                Nihil,
+                fugiat.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae sit
+                pariatur,
+                veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga iure!
+                Nihil,
+                fugiat.</p>
+
+            <h3>ChatBot Modal</h3>
+            <!-- Chat Embed-->
+            <script type="module">
+                import Chatbot from 'http://localhost:5678/web.js';
+
+                import { getChatConfig } from './waffChatConfig.js';
+                const chatConfig = getChatConfig();
+                console.log(chatConfig);
+                Chatbot.initModal(chatConfig);
+            </script>
+            <div style="background-color: #ccc; border: 1px solid #aaa; padding: 1rem;">
+                <h3>Some Widget</h3>
+                <ul>
+                    <li><a href="javascript:chatBot.open('Some prompt');">Some prompt</a></li>
+                    <li><a href="">Another prompt</a></li>
+                    <li><a href="">And more prompt</a></li>
+                </ul>
+                <div style="margin-top: 1rem; max-width: 37rem; margin-bottom: .5rem; min-height: 48px;">
+                    <flowise-modalchatbot buttonLabel="" showInput></flowise-modalchatbot>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div>
+                <span>Flowise</span>
+            </div>
+            <div>
+                <a href="https://docs.flowiseai.com/" target="_blank">Docs</a>
+                <a href="https://github.com/FlowiseAI/Flowise" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

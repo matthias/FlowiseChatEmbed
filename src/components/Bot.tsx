@@ -586,7 +586,17 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
         newSourceDocuments.push(source);
       }
     });
-    return newSourceDocuments;
+
+    // filter only sources with source starting with https://www.waff.at
+    const filteredSourceDocuments = newSourceDocuments.filter((source: any) => {
+      if (isValidURL(source.metadata.source)) {
+        const url = new URL(source.metadata.source);
+        return url.origin === 'https://www.waff.at';
+      }
+      return false;
+    });
+
+    return filteredSourceDocuments;
   };
 
   const addRecordingToPreviews = (blob: Blob) => {
@@ -833,15 +843,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
         )}
 
         {props.showTitle ? (
-          <div
-            class="flex flex-row items-center w-full h-[50px] absolute top-0 left-0 z-10"
-            style={{
-              background: props.bubbleBackgroundColor,
-              color: props.bubbleTextColor,
-              'border-top-left-radius': props.isFullPage ? '0px' : '6px',
-              'border-top-right-radius': props.isFullPage ? '0px' : '6px',
-            }}
-          >
+          <div class="flex flex-row items-center w-full h-[50px] absolute top-0 left-0 z-10">
             <Show when={props.titleAvatarSrc}>
               <>
                 <div style={{ width: '15px' }} />
@@ -922,13 +924,13 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
                     {message.type === 'userMessage' && loading() && index() === messages().length - 1 && <LoadingBubble />}
                     {message.type === 'apiMessage' && message.message === '' && loading() && index() === messages().length - 1 && <LoadingBubble />}
                     {message.sourceDocuments && message.sourceDocuments.length && (
-                      <div style={{ display: 'flex', 'flex-direction': 'row', width: '100%', 'flex-wrap': 'wrap' }}>
+                      <div class="flex flex-wrap gap-3 ml-10">
                         <For each={[...removeDuplicateURL(message)]}>
                           {(src) => {
                             const URL = isValidURL(src.metadata.source);
                             return (
                               <SourceBubble
-                                pageContent={URL ? URL.pathname : src.pageContent}
+                                pageContent={src.pageContent}
                                 metadata={src.metadata}
                                 onSourceClick={() => {
                                   if (URL) {

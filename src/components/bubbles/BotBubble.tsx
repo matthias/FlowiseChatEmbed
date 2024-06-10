@@ -21,8 +21,8 @@ type Props = {
   feedbackColor?: string;
 };
 
-const defaultBackgroundColor = '#f7f8ff';
-const defaultTextColor = '#303235';
+const defaultBackgroundColor = 'var(--chatbot-host-bubble-bg-color, #f7f8ff)';
+const defaultTextColor = 'var(--chatbot-host-bubble-color, #303235)';
 const defaultFontSize = 16;
 const defaultFeedbackColor = '#3B81F6';
 
@@ -168,15 +168,15 @@ export const BotBubble = (props: Props) => {
   });
 
   return (
-    <div>
-      <div class="flex flex-row justify-start mb-2 items-start host-container" style={{ 'margin-right': '50px' }}>
+    <div class="mb-2">
+      <div class="flex flex-row justify-start items-start host-container mr-10">
         <Show when={props.showAvatar}>
           <Avatar initialAvatarSrc={props.avatarSrc} />
         </Show>
         {props.message.message && (
           <span
             ref={botMessageEl}
-            class="px-4 py-2 ml-2 max-w-full chatbot-host-bubble prose"
+            class="px-4 py-2 max-w-full chatbot-host-bubble prose"
             data-testid="host-bubble"
             style={{
               'background-color': props.backgroundColor ?? defaultBackgroundColor,
@@ -187,10 +187,10 @@ export const BotBubble = (props: Props) => {
           />
         )}
       </div>
-      <div>
+      <div class={`${props.showAvatar ? 'ml-8' : ''}`}>
         {props.chatFeedbackStatus && props.message.messageId && (
           <>
-            <div class={`flex items-center px-2 pb-2 ${props.showAvatar ? 'ml-10' : ''}`}>
+            <div class={`flex items-center px-1 pb-2`}>
               <CopyToClipboardButton feedbackColor={props.feedbackColor} onClick={() => copyMessageToClipboard()} />
               <Show when={copiedMessage()}>
                 <div class="copied-message" style={{ color: props.feedbackColor ?? defaultFeedbackColor }}>

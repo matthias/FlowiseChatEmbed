@@ -1,3 +1,3 @@
-import { JSX } from 'solid-js/jsx-runtime';
-export declare const SendIcon: (props: JSX.SvgSVGAttributes<SVGSVGElement>) => JSX.Element;
+import { IconProps } from './types';
+export declare const SendIcon: (props: IconProps) => import("solid-js").JSX.Element;
 //# sourceMappingURL=SendIcon.d.ts.map

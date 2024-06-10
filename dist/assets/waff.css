@@ -1,0 +1,88 @@
+:host {
+  --chatbot-container-bg-image: ;
+  --chatbot-container-bg-color: rgba(255, 255, 255, var(--tw-bg-opacity, 0.8));
+  --chatbot-container-font-family: Arial, sans-serif;
+
+  --chatbot-button-bg-color: #ffffff;
+  --chatbot-button-color: #000;
+
+  --chatbot-host-bubble-bg-color: transparent;
+  --chatbot-host-bubble-color: #303235;
+
+  --chatbot-guest-bubble-bg-color: rgba(255, 71, 71, var(--tw-bg-opacity, 0.8));
+  --chatbot-guest-bubble-color: #ffffff;
+
+  --chatbot-input-bg-color: #ffffff;
+  --chatbot-input-color: #303235;
+  --chatbot-input-placeholder-color: #9095a0;
+
+  --chatbot-header-bg-color: #ffffff;
+  --chatbot-header-color: #303235;
+
+  --chatbot-border-radius: 6px;
+
+  /* Phone input */
+  --PhoneInputCountryFlag-borderColor: transparent;
+  --PhoneInput-color--focus: transparent;
+}
+
+.chatbot-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  background-image:
+    radial-gradient(circle at 0.54% 7.38%, rgb(112, 35, 138), transparent 28%),
+    radial-gradient(circle at 58.91% 57.57%, rgb(112, 35, 138), transparent 56%),
+    radial-gradient(circle at 8.64% 11.39%, rgba(255, 71, 71), transparent 52%),
+    radial-gradient(circle at 82.45% 99.62%, rgb(255, 71, 71), transparent 34%),
+    radial-gradient(circle at 99.93% 48.44%, rgb(112, 35, 138), transparent 19%),
+    radial-gradient(circle at 50% 50%, rgb(112, 35, 138), rgb(112, 35, 138) 100%),
+    radial-gradient(circle at 38.64% 15.39%, rgb(255, 71, 71), transparent 52%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.chatbot-container {
+  border-radius: 1rem;
+  font-family:
+    Helvetica,
+    Arial,
+    -apple-system,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+}
+
+.chatbot-header {
+  background-color: white;
+
+  .chatbot-button {
+    color: #70238a;
+  }
+}
+
+.chatbot-guest-bubble {
+  color: var(--chatbot-guest-bubble-color);
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+}
+
+.scrollbar-transparent {
+  scrollbar-color: rgba(255 200 200 / 50%) transparent;
+}
+
+.chatbot-input:focus-within {
+  border-color: #000;
+}
+
+.chatbot-prompt-bubble {
+  background-color: var(--chatbot-guest-bubble-bg-color);
+  color: var(--chatbot-guest-bubble-color);
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+}

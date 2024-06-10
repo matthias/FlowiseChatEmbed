@@ -1,32 +1,22 @@
 type Props = {
   pageContent: string;
-  metadata: object;
+  metadata: { topic?: string; source?: string };
   onSourceClick?: () => void;
 };
 export const SourceBubble = (props: Props) => (
   <>
-    <div
+    <article
       data-modal-target="defaultModal"
       data-modal-toggle="defaultModal"
-      class="flex justify-start mb-2 items-start animate-fade-in host-container hover:brightness-90 active:brightness-75"
+      class="mb-2 animate-fade-in host-container hover:brightness-90 active:brightness-75 max-w-[12rem] bg-white bg-opacity-70 p-2 rounded-lg shadow-sm cursor-pointer"
       onClick={() => props.onSourceClick?.()}
     >
-      <span
-        class="px-2 py-1 ml-1 whitespace-pre-wrap max-w-full chatbot-host-bubble"
-        data-testid="host-bubble"
-        style={{
-          width: 'max-content',
-          'max-width': '80px',
-          'font-size': '13px',
-          'border-radius': '15px',
-          cursor: 'pointer',
-          'text-overflow': 'ellipsis',
-          overflow: 'hidden',
-          'white-space': 'nowrap',
-        }}
-      >
-        {props.pageContent}
-      </span>
-    </div>
+      {props.metadata.topic && <h4 class="font-medium text-sm">{props.metadata.topic}</h4>}
+      {props.metadata.source && (
+        <p>
+          <span class="underline text-blue-800 line-clamp-3 text-ellipsis overflow-hidden text-sm">{props.metadata.source}</span>
+        </p>
+      )}
+    </article>
   </>
 );
