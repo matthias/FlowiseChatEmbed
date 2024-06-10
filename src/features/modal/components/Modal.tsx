@@ -109,7 +109,7 @@ export const Modal = (props: ModalProps) => {
               <div class="flex flex-col overflow-y-auto max-h-full flex-grow scrollbar-transparent">
                 <h1 class="text-white text-3xl font-bold">
                   <WaffLogo />
-                  <span class="sr-only"></span>
+                  <span class="sr-only" />
                 </h1>
                 <main class="flex-grow">
                   <p class="text-white text-xl my-4">
