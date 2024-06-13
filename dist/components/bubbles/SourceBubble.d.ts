@@ -1,6 +1,7 @@
 type Props = {
     pageContent: string;
     metadata: {
+        title?: string;
         topic?: string;
         source?: string;
     };

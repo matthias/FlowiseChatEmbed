@@ -13,14 +13,9 @@ declare const chatbot: {
         chatflowConfig?: Record<string, unknown> | undefined;
         observersConfig?: import("./components/Bot").observersConfigType | undefined;
     }) => void;
-    initModal: (props: {
-        chatflowid: string;
-        apiHost?: string | undefined;
-        chatflowConfig?: Record<string, unknown> | undefined;
-        observersConfig?: import("./components/Bot").observersConfigType | undefined;
-    } & {
+    initModal: (props: import(".").BotProps & import("./features/modal/types").ModalParams & {
         id?: string | undefined;
-    }) => void;
+    }) => import("./window").FlowiseModalElement;
     destroy: () => void;
 };
 export default chatbot;

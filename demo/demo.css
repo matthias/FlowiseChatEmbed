@@ -24,13 +24,18 @@
      font-family: Inter, Arial, sans-serif;
      min-height: 100vh;
      display: flex;
-    flex-direction: column;
+     flex-direction: column;
 
  }
 
  header {
      background-color: #f0f0f0;
      padding: 1rem 2rem;
+     position: fixed;
+     top: 0;
+     left: 0;
+     right: 0;
+     z-index: 50;
  }
 
  header h1 {
@@ -56,32 +61,37 @@
      position: relative;
      bottom: 0;
  }
+
  footer .container,
  header .container {
      display: flex;
      justify-content: space-between;
      align-items: center;
  }
+
  .nav-horizontal {
      display: flex;
      gap: .5rem;
  }
+
  .nav-horizontal a {
-    display: inline-block;
-    position: relative;
+     display: inline-block;
+     position: relative;
      text-decoration: none;
      color: var(--primary-color);
      font-weight: 600;
  }
+
  .nav-horizontal a:hover {
      text-decoration: underline;
  }
+
  /* dividers between nav items */
-.nav-horizontal a:not(:last-child)::after {
-    content: '|';
-    margin-left: .5rem;
-    color: var(--secondary-color);
-}
+ .nav-horizontal a:not(:last-child)::after {
+     content: '|';
+     margin-left: .5rem;
+     color: var(--secondary-color);
+ }
 
  /* Form */
 
@@ -110,4 +120,3 @@
      border: 1px solid #ccc;
      grid-column: field;
  }
-

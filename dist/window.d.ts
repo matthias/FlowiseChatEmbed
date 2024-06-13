@@ -1,4 +1,5 @@
 import { observersConfigType } from './components/Bot';
+import { ModalProps } from './features/modal/components/Modal';
 type BotProps = {
     chatflowid: string;
     apiHost?: string;
@@ -8,9 +9,14 @@ type BotProps = {
 export declare const initFull: (props: BotProps & {
     id?: string;
 }) => void;
-export declare const initModal: (props: BotProps & {
+export type FlowiseModalElement = HTMLElement & {
+    openBot?: (input?: string) => void;
+    buttonLabel?: string;
+    showInput?: boolean;
+};
+export declare const initModal: (props: ModalProps & {
     id?: string;
-}) => void;
+}) => FlowiseModalElement;
 export declare const init: (props: BotProps) => void;
 export declare const destroy: () => void;
 type Chatbot = {
@@ -24,9 +30,9 @@ export declare const parseChatbot: () => {
         id?: string;
     }) => void;
     init: (props: BotProps) => void;
-    initModal: (props: BotProps & {
+    initModal: (props: ModalProps & {
         id?: string;
-    }) => void;
+    }) => FlowiseModalElement;
     destroy: () => void;
 };
 export declare const injectChatbotInWindow: (bot: Chatbot) => void;

@@ -168,7 +168,7 @@ export const BotBubble = (props: Props) => {
   });
 
   return (
-    <div class="mb-2">
+    <div class="mb-6">
       <div class="flex flex-row justify-start items-start host-container mr-10">
         <Show when={props.showAvatar}>
           <Avatar initialAvatarSrc={props.avatarSrc} />
@@ -179,6 +179,7 @@ export const BotBubble = (props: Props) => {
             class="px-4 py-2 max-w-full chatbot-host-bubble prose"
             data-testid="host-bubble"
             style={{
+              '--tw-prose-bullets': 'black',
               'background-color': props.backgroundColor ?? defaultBackgroundColor,
               color: props.textColor ?? defaultTextColor,
               'border-radius': '6px',

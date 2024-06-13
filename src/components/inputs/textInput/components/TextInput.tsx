@@ -112,9 +112,9 @@ export const TextInput = (props: Props) => {
             <input style={{ display: 'none' }} multiple ref={fileUploadRef as HTMLInputElement} type="file" onChange={handleFileChange} />
           </>
         ) : null}
-        <div class="pt-[6px] flex-grow">
+        <div class="flex-grow">
           <ShortTextInput
-            ref={inputRef as HTMLTextAreaElement}
+            ref={inputRef as HTMLInputElement}
             onInput={handleInput}
             maxlength={props.maxChars}
             value={inputValue()}

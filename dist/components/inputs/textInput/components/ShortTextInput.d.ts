@@ -5,7 +5,7 @@ type ShortTextInputProps = {
     fontSize?: number;
     disabled?: boolean;
     maxlength?: number;
-} & Omit<JSX.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onInput'>;
+} & Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'onInput'>;
 export declare const ShortTextInput: (props: ShortTextInputProps) => JSX.Element;
 export {};
 //# sourceMappingURL=ShortTextInput.d.ts.map

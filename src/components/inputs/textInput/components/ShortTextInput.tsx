@@ -7,7 +7,7 @@ type ShortTextInputProps = {
   fontSize?: number;
   disabled?: boolean;
   maxlength?: number;
-} & Omit<JSX.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onInput'>;
+} & Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'onInput'>;
 
 const DEFAULT_HEIGHT = 56;
 
@@ -29,19 +29,8 @@ export const ShortTextInput = (props: ShortTextInputProps) => {
     }
   };
 
-  // @ts-expect-error: unknown type
-  const handleKeyDown = (e) => {
-    // Handle Shift + Enter new line
-    if (e.keyCode == 13 && e.shiftKey) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.currentTarget.value += '\n';
-      handleInput(e);
-    }
-  };
-
   return (
-    <textarea
+    <input
       ref={props.ref}
       class="focus:outline-none bg-transparent px-4 py-0 flex-1 min-w-full w-full h-full max-h-[128px] text-input disabled:opacity-50 disabled:cursor-not-allowed disabled:brightness-100 "
       disabled={props.disabled}
@@ -49,10 +38,9 @@ export const ShortTextInput = (props: ShortTextInputProps) => {
       style={{
         'font-size': props.fontSize ? `${props.fontSize}px` : '16px',
         resize: 'none',
-        'field-sizing': 'content',
       }}
       onInput={handleInput}
-      onKeyDown={handleKeyDown}
+      type="text"
       {...others}
     />
   );

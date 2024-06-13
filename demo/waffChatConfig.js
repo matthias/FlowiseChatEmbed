@@ -1,4 +1,4 @@
-const chatConfig = {
+export const chatConfig = {
   chatflowid: 'e3d9bbb2-ab94-4728-a829-9dd08773ed01',
   apiHost: 'https://waffchat.onrender.com',
   theme: {
@@ -25,16 +25,3 @@ const chatConfig = {
     },
   },
 };
-
-export function getChatConfig() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const chatflowid = urlParams.get('chatflowid');
-  if (chatflowid) {
-    chatConfig.chatflowid = chatflowid;
-    const chatflowidInput = document.getElementById('chatflowid');
-    chatflowidInput.value = chatflowid;
-  }
-  return chatConfig;
-}
-
-export default chatConfig;

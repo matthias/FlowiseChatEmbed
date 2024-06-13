@@ -1,5 +1,3 @@
-import DeviceDetector from 'device-detector-js';
-
 /**
  * @fileoverview This file contains the API to handle audio recording.
  * Originally from 'https://ralzohairi.medium.com/audio-recording-in-javascript-96eed45b75ee'
@@ -249,10 +247,7 @@ export const audioRecorder: AudioRecorder = {
       return Promise.reject(new Error('mediaDevices API or getUserMedia method is not supported in this browser.'));
     } else {
       // Feature is supported in browser
-      const deviceDetector = new DeviceDetector();
-      const userAgent = navigator.userAgent;
-      const device = deviceDetector.parse(userAgent);
-      const isSafari = device.client?.name === 'Mobile Safari';
+      const isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
 
       //create an audio stream
       return (
@@ -277,7 +272,7 @@ export const audioRecorder: AudioRecorder = {
             });
 
             //start the recording by calling the start method on the media recorder
-            if (isSafari) {
+            if (isMobileSafari) {
               // https://community.openai.com/t/whisper-problem-with-audio-mp4-blobs-from-safari/322252
               // https://community.openai.com/t/whisper-api-cannot-read-files-correctly/93420/46
               audioRecorder.mediaRecorder.start(1000);

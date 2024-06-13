@@ -1,9 +1,9 @@
-import { createSignal, Show, splitProps, onCleanup } from 'solid-js';
+import { createSignal, Show, splitProps, onCleanup, onMount } from 'solid-js';
 import styles from '../../../assets/index.css';
 import waffStyles from '../../../assets/waff.css';
 import { ModalButton } from './ModalButton';
 import { ModalParams } from '../types';
-import { Bot, BotProps } from '../../../components/Bot';
+import { Bot, BotProps, BotRef } from '../../../components/Bot';
 import { getModalButtonSize } from '@/utils';
 import { WaffLogo } from '@/components/icons/WaffLogo';
 
@@ -12,11 +12,36 @@ const defaultIconColor = 'white';
 
 export type ModalProps = BotProps & ModalParams;
 
-export const Modal = (props: ModalProps) => {
+export const Modal = (props: ModalProps, modalElement: any) => {
+  console.log('Modal props', props);
   const [bubbleProps] = splitProps(props, ['theme']);
 
   const [isBotOpened, setIsBotOpened] = createSignal(false);
   const [isBotStarted, setIsBotStarted] = createSignal(false);
+  const [buttonLabel, setButtonLabel] = createSignal('Zum Chatbot');
+  const [showInput, setShowInput] = createSignal(true);
+  const [buttonPosition, setButtonPosition] = createSignal({
+    bottom: bubbleProps.theme?.button?.bottom ?? 20,
+    right: bubbleProps.theme?.button?.right ?? 20,
+  });
+
+  let botRef: BotRef | null = null;
+
+  const callBotHandleSubmit = (input: string) => {
+    if (botRef) {
+      botRef.handleSubmit(input);
+    }
+  };
+
+  onMount(() => {
+    const buttonLabel = modalElement.element.attributes.getNamedItem('buttonLabel')?.value;
+    if (buttonLabel) setButtonLabel(buttonLabel);
+
+    const showInput = modalElement.element.attributes.getNamedItem('showInput')?.value;
+    setShowInput(showInput != 'false' && showInput != '0' && showInput != 'no' && showInput != undefined);
+
+    console.log('Modal mounted', modalElement);
+  });
 
   const openBot = () => {
     if (!isBotStarted()) setIsBotStarted(true);
@@ -30,9 +55,17 @@ export const Modal = (props: ModalProps) => {
   const toggleBot = () => {
     isBotOpened() ? closeBot() : openBot();
   };
+  window.addEventListener('openBot', (event: any) => {
+    openBot();
+    const msg = event.detail.msg;
+    if (msg) {
+      callBotHandleSubmit(msg);
+    }
+  });
 
   onCleanup(() => {
     setIsBotStarted(false);
+    window.removeEventListener('openBot', openBot);
   });
 
   const buttonSize = getModalButtonSize(props.theme?.button?.size); // Default to 48px if size is not provided
@@ -56,6 +89,9 @@ export const Modal = (props: ModalProps) => {
         {...bubbleProps.theme?.button}
         toggleBot={toggleBot}
         isBotOpened={isBotOpened()}
+        buttonLabel={buttonLabel()}
+        showInput={showInput()}
+        setButtonPosition={setButtonPosition}
         dragAndDrop={bubbleProps.theme?.button?.dragAndDrop ?? false}
       />
       <div
@@ -102,6 +138,7 @@ export const Modal = (props: ModalProps) => {
                   chatflowConfig={props.chatflowConfig}
                   apiHost={props.apiHost}
                   observersConfig={props.observersConfig}
+                  ref={(instance) => (botRef = instance)}
                 />
               </Show>
             </div>

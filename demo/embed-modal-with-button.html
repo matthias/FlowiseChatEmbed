@@ -43,25 +43,166 @@
             <h3>ChatBot Modal</h3>
             <!-- Chat Embed-->
             <script type="module">
-                import Chatbot from 'http://localhost:5678/web.js';
+                if (!window.chatbot) {
+                    const customElement = document.createElement('flowise-modalchatbot');
+                    document.body.appendChild(customElement);
 
-                import { getChatConfig } from './waffChatConfig.js';
-                const chatConfig = getChatConfig();
-                console.log(chatConfig);
-                Chatbot.initModal(chatConfig);
+                    const { default: ChatBot } = await import('./web.js');
+                    const { chatConfig } = await import('./waffChatConfig.js');
+                    console.log('chatConfig', chatConfig);
+
+                    window.chatbot = ChatBot.initModal(chatConfig);
+                }
             </script>
             <div style="background-color: #ccc; border: 1px solid #aaa; padding: 1rem;">
                 <h3>Some Widget</h3>
                 <ul>
-                    <li><a href="javascript:chatBot.open('Some prompt');">Some prompt</a></li>
-                    <li><a href="">Another prompt</a></li>
+                    <li><a
+                            href="javascript:window.chatbot.openBot('Welche Berufe und Ausbildungen werden angeboten?');">Welche
+                            Berufe und Ausbildungen werden angeboten?</a></li>
+                    <li><a href="javascript:window.chatbot.openBot('Was ist Jobs PLUS Ausbildung?');">Was ist Jobs PLUS
+                            Ausbildung?</a></li>
                     <li><a href="">And more prompt</a></li>
                 </ul>
                 <div style="margin-top: 1rem; max-width: 37rem; margin-bottom: .5rem; min-height: 48px;">
-                    <flowise-modalchatbot buttonLabel="" showInput></flowise-modalchatbot>
+                    <div>
+                        <form onsubmit="window.chatbot.openBot(document.querySelector('input').value); return false;"
+                            style="display: flex;">
+                            <input type="search" placeholder="Deine Frage ..." style="flex: 1;">
+                            <button type="submit">
+                                <span class="sr-only" style="display: none;">Absenden</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"
+                                    role="img" fill="currentColor">
+                                    <path
+                                        d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-.15,0L19.57,82.84a16,16,0,0,0-2.49,29.8L102,154l41.3,84.87A15.86,15.86,0,0,0,157.74,248q.69,0,1.38-.06a15.88,15.88,0,0,0,14-11.51l58.2-191.94c0-.05,0-.1,0-.15A16,16,0,0,0,227.32,28.68ZM157.83,231.85l-.05.14,0-.07-40.06-82.3,48-48a8,8,0,0,0-11.31-11.31l-48,48L24.08,98.25l-.07,0,.14,0L216,40Z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
                 </div>
+                <div style="margin-top: 1rem; max-width: 37rem; margin-bottom: .5rem; min-height: 48px;">
+                    <div buttonLabel="Chatbot2 öffnen" id="chatbot-02"></div>
+                </div>
+                <div style="margin-top: 1rem; max-width: 37rem; margin-bottom: .5rem; min-height: 48px;">
+                    <div buttonLabel="Chatbot3 öffnen" id="chatbot-03"></div>
+                </div>
+
+            </div>
+            <div>
+                <h2>Some Demo Content</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <h2>Some Demo Content</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <h2>Some Demo Content</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <h2>Some Demo Content</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <h2>Some Demo Content</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla beatae deserunt quis recusandae
+                    sit
+                    pariatur,
+                    veritatis repellat esse facilis! Autem assumenda impedit consequatur hic facilis. Eligendi, fuga
+                    iure!
+                    Nihil,
+                    fugiat.</p>
+
             </div>
         </div>
+
     </main>
     <footer>
         <div class="container">

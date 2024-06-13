@@ -56,7 +56,11 @@ export type BotProps = {
     isFullPage?: boolean;
     footer?: FooterTheme;
     observersConfig?: observersConfigType;
+    ref?: ((instance: BotRef | null) => void) | undefined;
 };
+export interface BotRef {
+    handleSubmit: (value: string) => Promise<void>;
+}
 export type LeadsConfig = {
     status: boolean;
     title?: string;

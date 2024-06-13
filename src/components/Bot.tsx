@@ -1,4 +1,4 @@
-import { createSignal, createEffect, For, onMount, Show, mergeProps, on, createMemo } from 'solid-js';
+import { createSignal, createEffect, For, onMount, Show, mergeProps, on, createMemo, onCleanup } from 'solid-js';
 import { v4 as uuidv4 } from 'uuid';
 import { sendMessageQuery, isStreamAvailableQuery, IncomingInput, getChatbotConfig } from '@/queries/sendMessageQuery';
 import { TextInput } from './inputs/textInput';
@@ -86,7 +86,12 @@ export type BotProps = {
   isFullPage?: boolean;
   footer?: FooterTheme;
   observersConfig?: observersConfigType;
+  ref?: ((instance: BotRef | null) => void) | undefined;
 };
+
+export interface BotRef {
+  handleSubmit: (value: string) => Promise<void>;
+}
 
 export type LeadsConfig = {
   status: boolean;
@@ -250,6 +255,22 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     }, 50);
   });
 
+  // Make the function accessible via ref
+  onMount(() => {
+    if (props.ref) {
+      props.ref({
+        handleSubmit,
+      });
+    }
+  });
+
+  // Cleanup the ref on unmount
+  onCleanup(() => {
+    if (props.ref) {
+      props.ref(null);
+    }
+  });
+
   const scrollToBottom = () => {
     setTimeout(() => {
       chatContainer?.scrollTo(0, chatContainer.scrollHeight);
@@ -311,9 +332,13 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     handleSubmit(prompt);
   };
 
+  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
   // Handle form submission
   const handleSubmit = async (value: string) => {
+    console.log('handleSubmit', value);
     setUserInput(value);
+    await sleep(1000);
 
     if (value.trim() === '') {
       const containsAudio = previews().filter((item) => item.type === 'audio').length > 0;
@@ -334,13 +359,19 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
       };
     });
 
+    console.log('urls', urls);
+
     clearPreviews();
+
+    console.log('messages', messages());
 
     setMessages((prevMessages) => {
       const messages: MessageType[] = [...prevMessages, { message: value, type: 'userMessage', fileUploads: urls }];
       addChatMessage(messages);
       return messages;
     });
+
+    console.log('messages::', messages());
 
     const body: IncomingInput = {
       question: value,
@@ -359,6 +390,12 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
       setMessages((prevMessages) => [...prevMessages, { message: '', type: 'apiMessage' }]);
     }
 
+    console.log('sendMessageQuery', {
+      chatflowid: props.chatflowid,
+      apiHost: props.apiHost,
+      body,
+    });
+
     const result = await sendMessageQuery({
       chatflowid: props.chatflowid,
       apiHost: props.apiHost,
@@ -368,6 +405,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     if (result.data) {
       const data = result.data;
       const question = data.question;
+      console.log('data', data);
       if (value === '' && question) {
         setMessages((data) => {
           const messages = data.map((item, i) => {
@@ -843,7 +881,10 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
         )}
 
         {props.showTitle ? (
-          <div class="flex flex-row items-center w-full h-[50px] absolute top-0 left-0 z-10">
+          <div
+            class="flex flex-row items-center w-full h-[50px] absolute top-0 left-0 z-10"
+            style={{ 'background-image': 'linear-gradient(180deg, rgba(110,49,159,0.2) 0%, rgba(252,70,107,0) 60%' }}
+          >
             <Show when={props.titleAvatarSrc}>
               <>
                 <div style={{ width: '15px' }} />
@@ -868,7 +909,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
         <div class="flex flex-col w-full h-full justify-start z-0">
           <div
             ref={chatContainer}
-            class="overflow-y-scroll flex flex-col flex-grow min-w-full w-full px-3 pt-[70px] relative scrollable-container chatbot-chat-view scroll-smooth"
+            class="overflow-y-scroll flex flex-col flex-grow min-w-full w-full px-3 pt-[70px] relative scrollable-container overscroll-contain chatbot-chat-view scroll-smooth"
           >
             <For each={[...messages()]}>
               {(message, index) => {

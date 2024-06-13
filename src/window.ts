@@ -1,4 +1,5 @@
 import { observersConfigType } from './components/Bot';
+import { ModalProps } from './features/modal/components/Modal';
 
 /* eslint-disable solid/reactivity */
 type BotProps = {
@@ -18,12 +19,24 @@ export const initFull = (props: BotProps & { id?: string }) => {
   elementUsed = fullElement;
 };
 
-export const initModal = (props: BotProps & { id?: string }) => {
+export type FlowiseModalElement = HTMLElement & {
+  openBot?: (input?: string) => void;
+  buttonLabel?: string;
+  showInput?: boolean;
+};
+
+export const initModal = (props: ModalProps & { id?: string }) => {
   destroy();
-  const modalElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-modalchatbot');
+  const modalElement = (props.id ? document.getElementById(props.id) : document.querySelector('flowise-modalchatbot')) as FlowiseModalElement;
   if (!modalElement) throw new Error('<flowise-modalchatbot> element not found.');
   Object.assign(modalElement, props);
+
   elementUsed = modalElement;
+  modalElement.openBot = (input?: string) => {
+    const event = new CustomEvent('openBot', { bubbles: true, composed: true, detail: { msg: input } });
+    modalElement.dispatchEvent(event);
+  };
+  return modalElement;
 };
 
 export const init = (props: BotProps) => {

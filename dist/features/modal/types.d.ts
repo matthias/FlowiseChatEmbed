@@ -1,5 +1,9 @@
+import { FlowiseModalElement } from '@/window';
 export type ModalParams = {
     theme?: ModalTheme;
+    element?: FlowiseModalElement;
+    buttonLabel?: string;
+    showInput?: boolean;
 };
 export type ModalTheme = {
     chatWindow?: ChatWindowTheme;
