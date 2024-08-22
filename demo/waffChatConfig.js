@@ -5,6 +5,7 @@ export const chatConfig = {
     chatWindow: {
       showTitle: true,
       welcomeMessage: 'Ich bin der Pflegebot des waff. Welche Fragen hast du an mich?',
+      starterPrompts: ['Hi', 'Hallo', 'Hey'],
       errorMessage: 'FEHLER: Entschuldigung, es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
       backgroundColor: 'transparent',
       botMessage: {

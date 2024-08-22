@@ -6,6 +6,7 @@ import { ModalParams } from '../types';
 import { Bot, BotProps, BotRef } from '../../../components/Bot';
 import { getModalButtonSize } from '@/utils';
 import { WaffLogo } from '@/components/icons/WaffLogo';
+import { setCurrentLanguage } from '@/utils/i18n';
 
 const defaultButtonColor = '#3B81F6';
 const defaultIconColor = 'white';
@@ -13,7 +14,8 @@ const defaultIconColor = 'white';
 export type ModalProps = BotProps & ModalParams;
 
 export const Modal = (props: ModalProps, modalElement: any) => {
-  console.log('Modal props', props);
+  setCurrentLanguage('de');
+
   const [bubbleProps] = splitProps(props, ['theme']);
 
   const [isBotOpened, setIsBotOpened] = createSignal(false);
@@ -92,7 +94,7 @@ export const Modal = (props: ModalProps, modalElement: any) => {
         buttonLabel={buttonLabel()}
         showInput={showInput()}
         setButtonPosition={setButtonPosition}
-        dragAndDrop={bubbleProps.theme?.button?.dragAndDrop ?? false}
+        dragAndDrop={bubbleProps.theme?.button?.dragAndDrop ?? true}
       />
       <div
         id="chatbot-modal"
@@ -102,7 +104,7 @@ export const Modal = (props: ModalProps, modalElement: any) => {
           'transform-origin': 'center',
           transform: isBotOpened() ? 'scale3d(1, 1, 1)' : 'scale3d(0, 0, 1)',
           'box-shadow': 'rgb(0 0 0 / 16%) 0px 5px 40px',
-          'z-index': 42424242,
+          'z-index': 100000,
         }}
         class={`chatbot-modal fixed inset-0 ` + (isBotOpened() ? ' opacity-1' : ' opacity-0 pointer-events-none') + ` bottom-${chatWindowBottom}px`}
       >
@@ -126,6 +128,7 @@ export const Modal = (props: ModalProps, modalElement: any) => {
                   title={bubbleProps.theme?.chatWindow?.title}
                   titleAvatarSrc={bubbleProps.theme?.chatWindow?.titleAvatarSrc}
                   welcomeMessage={bubbleProps.theme?.chatWindow?.welcomeMessage}
+                  starterPrompts={bubbleProps.theme?.chatWindow?.starterPrompts}
                   errorMessage={bubbleProps.theme?.chatWindow?.errorMessage}
                   poweredByTextColor={bubbleProps.theme?.chatWindow?.poweredByTextColor}
                   textInput={bubbleProps.theme?.chatWindow?.textInput}
@@ -153,21 +156,24 @@ export const Modal = (props: ModalProps, modalElement: any) => {
                     Willkommen beim Chat des waff zum Thema <strong>Sozial- und Pflegeberufe</strong>
                   </p>
                   <p class="text-white text-lg my-4">
-                    Dieser versucht dir bei Fragen rund um das Thema auf Basis der Informationen auf der Website und in unseren Informationsunterlagen
-                    weiter zu helfen.
+                    Der Pflege-Chatbot steht Ihnen zur Verfügung, um Fragen zu diesen Berufen basierend auf den Informationen auf unserer Website und
+                    in unseren Informationsunterlagen zu beantworten.
                   </p>
                   <p class="text-white text-lg my-4">
-                    Wir befinden uns in einer Testphase und freuen uns über dein Feedback. Bitte beachte, dass der Chat keine verbindlichen Auskünfte
-                    geben kann und auch Fehler machen kann.
+                    Wir befinden uns in der Testphase und freuen uns über Feedback mittels „Daumen hoch“ und „Daumen runter“. <br />
+                    Bitte beachten Sie, dass der Chat keine verbindlichen Auskünfte geben kann und auch Fehler machen kann.
                   </p>
                 </main>
                 <footer>
                   <p class="text-white my-4">
-                    Bei weiteren Fragen wenden Sie sich gerne an unser Infotelefon für arbeitslose Wiener*innen unter der
+                    Für Fragen zu unseren konkreten Angeboten und Unterstützungsmöglichkeiten, empfehlen wir Ihnen einen Beratungstermin zu
+                    vereinbaren.
+                  </p>
+                  <p class="text-white my-4">
+                    Rufen Sie uns an unter
                     <span class="text-white font-bold text-xl mt-1 block">
-                      Nummer:{' '}
-                      <a href="tel:0043" class="underline">
-                        01 217 48 777
+                      <a href="tel:0800868686" class="underline">
+                        0800 86 86 86
                       </a>
                     </span>
                   </p>
@@ -176,20 +182,16 @@ export const Modal = (props: ModalProps, modalElement: any) => {
                     <br /> Fr 8 – 15 Uhr
                     <br />
                     <br /> Lassallestraße 1 1020 Wien
-                    <br />
-                    <a href="mailto:ai-kundInnencenter@waff.at" class="underline">
-                      ai-kundInnencenter@waff.at
-                    </a>
                   </p>
                   <p class="text-white mt-8 flex gap-2 text-sm">
                     <a href="https://www.waff.at/" class="underline">
                       www.waff.at
                     </a>
-                    <a href="https://www.waff.at/" class="underline">
+                    <a href="https://www.waff.at/impressum/" rel="noopener" target="_blank" class="underline">
                       Impressum
                     </a>
-                    <a href="https://www.waff.at/" class="underline">
-                      Datenschutz
+                    <a href="https://www.waff.at/datenschutzhinweis/" rel="noopener" target="_blank" class="underline">
+                      Datenschutzhinweis
                     </a>
                   </p>
                 </footer>

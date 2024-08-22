@@ -1,3 +1,4 @@
+import { t } from '@/utils/i18n';
 import { createSignal } from 'solid-js';
 
 type FeedbackContentDialogProps = {
@@ -45,7 +46,7 @@ const FeedbackContentDialog = (props: FeedbackContentDialogProps) => {
                 border: '1px solid #eeeeee',
               }}
             >
-              <span class="whitespace-pre-wrap font-semibold max-w-full">Provide additional feedback</span>
+              <span class="whitespace-pre-wrap font-semibold max-w-full">{t('feedback.title')}</span>
               <button
                 class="p-1 ml-auto bg-transparent border-0 text-black float-right text-xl leading-none font-semibold outline-none focus:outline-none"
                 type="button"
@@ -80,7 +81,7 @@ const FeedbackContentDialog = (props: FeedbackContentDialogProps) => {
                   border: '1px solid #eeeeee',
                   color: props.textColor ?? defaultTextColor,
                 }}
-                placeholder="What do you think of the response?"
+                placeholder={t('feedback.inputPlaceholder')}
                 value={inputValue()}
               />
             </div>
@@ -90,7 +91,7 @@ const FeedbackContentDialog = (props: FeedbackContentDialogProps) => {
                 type="button"
                 onClick={submit}
               >
-                Submit Feedback
+                {t('feedback.submitButton')}
               </button>
             </div>
           </div>

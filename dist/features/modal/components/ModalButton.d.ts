@@ -9,6 +9,7 @@ type Props = ButtonTheme & {
         right: number;
     }) => void;
     dragAndDrop: boolean;
+    backgroundImage?: string;
 };
 export declare const ModalButton: (props: Props) => import("solid-js").JSX.Element;
 export {};

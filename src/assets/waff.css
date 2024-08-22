@@ -46,6 +46,21 @@
   background-position: center;
 }
 
+.chatbot-modal-button>button {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  background-image:
+    radial-gradient(circle at 0.54% 7.38%, rgb(112, 35, 138), transparent 28%),
+    radial-gradient(circle at 58.91% 57.57%, rgb(112, 35, 138), transparent 56%),
+    radial-gradient(circle at 8.64% 11.39%, rgba(255, 71, 71), transparent 52%),
+    radial-gradient(circle at 99.93% 48.44%, rgb(112, 35, 138), transparent 19%),
+    radial-gradient(circle at 50% 50%, rgb(112, 35, 138), rgb(112, 35, 138) 100%);
+  font-weight: 600;
+  border-radius: .25rem;
+  color: white;
+}
+
 .chatbot-container {
   border-radius: 1rem;
   font-family:

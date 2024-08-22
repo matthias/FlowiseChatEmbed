@@ -70,6 +70,7 @@ export type BotProps = {
   apiHost?: string;
   chatflowConfig?: Record<string, unknown>;
   welcomeMessage?: string;
+  starterPrompts?: string[];
   errorMessage?: string;
   botMessage?: BotMessageTheme;
   userMessage?: UserMessageTheme;
@@ -571,6 +572,13 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
           setMessages((prevMessages) => [...prevMessages, { message: '', type: 'leadCaptureMessage' }]);
         }
       }
+    }
+
+    const localStarterPrompts = props.starterPrompts;
+    if (localStarterPrompts) {
+      // join the local starter prompts with the chatbot starter prompts
+      const combinedStarterPrompts = [...new Set([...localStarterPrompts, ...starterPrompts()])];
+      setStarterPrompts(combinedStarterPrompts);
     }
 
     const socket = socketIOClient(props.apiHost as string);

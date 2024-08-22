@@ -61,7 +61,7 @@ export const Bubble = (props: BubbleProps) => {
           transform: isBotOpened() ? 'scale3d(1, 1, 1)' : 'scale3d(0, 0, 1)',
           'box-shadow': 'rgb(0 0 0 / 16%) 0px 5px 40px',
           'background-color': bubbleProps.theme?.chatWindow?.backgroundColor || '#ffffff',
-          'z-index': 42424242,
+          'z-index': 100000,
           bottom: `${Math.min(buttonPosition().bottom + buttonSize + 10, window.innerHeight - chatWindowBottom)}px`,
           right: `${Math.min(buttonPosition().right, window.innerWidth - 410)}px`,
         }}
@@ -80,6 +80,7 @@ export const Bubble = (props: BubbleProps) => {
             title={bubbleProps.theme?.chatWindow?.title}
             titleAvatarSrc={bubbleProps.theme?.chatWindow?.titleAvatarSrc}
             welcomeMessage={bubbleProps.theme?.chatWindow?.welcomeMessage}
+            starterPrompts={bubbleProps.theme?.chatWindow?.starterPrompts}
             errorMessage={bubbleProps.theme?.chatWindow?.errorMessage}
             poweredByTextColor={bubbleProps.theme?.chatWindow?.poweredByTextColor}
             textInput={bubbleProps.theme?.chatWindow?.textInput}
